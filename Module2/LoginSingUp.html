@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Log In | Sign Up</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link
       rel="icon"
       href="http://first_one.surge.sh/images/icon.png"
@@ -507,7 +508,7 @@
           <a
             class="btn pulse"
             href="../Module2/LoginSingUp.html#open-modal1"
-            style="position: absolute; top: 80%; left: 40.5%; height: 20px"
+            style="position: absolute; top: 79%; left: 40.5%; height: 22px"
           >
             Log In</a
           >
@@ -516,7 +517,7 @@
           <a
             class="btn pulse"
             href="../Module2/LoginSingUp.html#open-modal2"
-            style="position: relative; top: -139px; left: 80px"
+            style="position: relative; top: -135px; left: 80px"
           >
             Sign Up</a
           >
@@ -657,7 +658,16 @@
             rounded: true,
             timeout: 3000,
           });
-
+          $.post(
+            "https://iwp-project-backend.herokuapp.com/signin",
+            {
+              password: "Mihi679696",
+              email: "mmkhsdcsdfdsdsmdk@odx23do.com",
+            },
+            function (data, status) {
+              alert("Data: " + data + "\nStatus: " + status);
+            }
+          );
           setTimeout(function () {
             window.location.href = "../Module3/ChooseDropCreate.htm";
           }, 2000);
@@ -741,6 +751,18 @@
             rounded: true,
             timeout: 3000,
           });
+          $.post(
+            "https://iwp-project-backend.herokuapp.com/signup",
+            {
+              username: "Mihir",
+              password: "Mihi679696",
+              mobile: "7111122339",
+              email: "mmkhsdcsdfdsdsmdk@odx23do.com",
+            },
+            function (data, status) {
+              alert("Data: " + data + "\nStatus: " + status);
+            }
+          );
 
           setTimeout(function () {
             window.location.href = "../Module2/LoginSingUp.html#open-modal1";
