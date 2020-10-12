@@ -571,6 +571,7 @@
             action="../Module2/LoginSingUp.html"
             name="myForm2"
             align="center"
+            id="Submit"
           >
             <input
               type="text"
@@ -602,7 +603,7 @@
             /><br />
             <p id="pss"></p>
             <input
-              type="button"
+              type="submit"
               name="signup"
               value="Sign Up"
               id="signup_btn"
@@ -613,162 +614,170 @@
     </div>
 
     <script type="text/javascript">
-      function ValidateEmail(mail) {
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
-          return true;
-        }
-        return false;
-      }
+      // function ValidateEmail(mail) {
+      //   if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+      //     return true;
+      //   }
+      //   return false;
+      // }
 
-      var signup_data = {};
+      // var signup_data = {};
 
-      document.querySelector("i").addEventListener("click", function () {
-        window.location.href = "./index.html";
-      });
+      // document.querySelector("i").addEventListener("click", function () {
+      //   window.location.href = "./index.html";
+      // });
 
-      document.myForm1.login.addEventListener("click", function () {
-        if (document.myForm1.luname.value == "") {
-          Notify({
-            content: "Username must be filled out",
-            color:
-              "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
-            rounded: true,
-            timeout: 2000,
-          });
-        }
-        if (document.myForm1.lpass.value == "") {
-          Notify({
-            content: "Password must be filled out",
-            color:
-              "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
-            rounded: true,
-            timeout: 3000,
-          });
-        }
+      // document.myForm1.login.addEventListener("click", function () {
+      //   if (document.myForm1.luname.value == "") {
+      //     Notify({
+      //       content: "Username must be filled out",
+      //       color:
+      //         "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
+      //       rounded: true,
+      //       timeout: 2000,
+      //     });
+      //   }
+      //   if (document.myForm1.lpass.value == "") {
+      //     Notify({
+      //       content: "Password must be filled out",
+      //       color:
+      //         "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
+      //       rounded: true,
+      //       timeout: 3000,
+      //     });
+      //   }
 
-        if (
-          (document.myForm1.luname.value == signup_data["username"] &&
-            document.myForm1.lpass.value == signup_data["password"]) ||
-          (document.myForm1.luname.value == "admin" &&
-            document.myForm1.lpass.value == "pass")
-        ) {
-          Notify({
-            content: "Login Successful",
-            color: "green",
-            rounded: true,
-            timeout: 3000,
-          });
-          $.post(
-            "https://iwp-project-backend.herokuapp.com/signin",
-            {
-              password: "Mihi679696",
-              email: "mmkhsdcsdfdsdsmdk@odx23do.com",
+      //   if (
+      //     (document.myForm1.luname.value == signup_data["username"] &&
+      //       document.myForm1.lpass.value == signup_data["password"]) ||
+      //     (document.myForm1.luname.value == "admin" &&
+      //       document.myForm1.lpass.value == "pass")
+      //   ) {
+      //     Notify({
+      //       content: "Login Successful",
+      //       color: "green",
+      //       rounded: true,
+      //       timeout: 3000,
+      //     });
+      //     $.post(
+      //       "https://iwp-project-backend.herokuapp.com/signin",
+      //       {
+      //         password: "Mihi679696",
+      //         email: "mmkhsdcsdfdsdsmdk@odx23do.com",
+      //       },
+      //       function (data, status) {
+      //         alert("Data: " + data + "\nStatus: " + status);
+      //       }
+      //     );
+      //     setTimeout(function () {
+      //       window.location.href = "../Module3/ChooseDropCreate.htm";
+      //     }, 2000);
+      //   } else if (
+      //     document.myForm1.luname.value != "" &&
+      //     document.myForm1.lpass.value != ""
+      //   ) {
+      //     Notify({
+      //       content: "Invalid Credentials",
+      //       color:
+      //         "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
+      //       rounded: true,
+      //       timeout: 3000,
+      //     });
+      //   }
+      // });
+
+      // document.myForm2.signup.addEventListener("click", function () {
+      //   if (document.myForm2.suname.value == "") {
+      //     Notify({
+      //       content: "Username must be filled out",
+      //       color:
+      //         "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
+      //       rounded: true,
+      //       timeout: 2000,
+      //     });
+      //   }
+
+      //   if (document.myForm2.email.value == "") {
+      //     Notify({
+      //       content: "Email must be filled out",
+      //       color:
+      //         "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
+      //       rounded: true,
+      //       timeout: 3000,
+      //     });
+      //   } else if (ValidateEmail(document.myForm2.email.value) == false) {
+      //     Notify({
+      //       content: "Email must be valid",
+      //       color:
+      //         "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
+      //       rounded: true,
+      //       timeout: 3000,
+      //     });
+      //   }
+
+      //   if (document.myForm2.mobile.value == "") {
+      //     Notify({
+      //       content: "Mobile Number must be filled out",
+      //       color:
+      //         "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
+      //       rounded: true,
+      //       timeout: 4000,
+      //     });
+      //   }
+
+      // if (document.myForm2.spass.value == "") {
+      //   Notify({
+      //     content: "Password must be filled out",
+      //     color:
+      //       "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
+      //     rounded: true,
+      //     timeout: 5000,
+      //   });
+      // }
+
+      // if (
+      //   document.myForm2.suname.value != "" &&
+      //   document.myForm2.email.value != "" &&
+      //   document.myForm2.spass.value != "" &&
+      //   document.myForm2.mobile.value != ""
+      // ) {
+      //   signup_data["username"] = document.myForm2.suname.value;
+      //   signup_data["email"] = document.myForm2.email.value;
+      //   signup_data["mobile"] = document.myForm2.mobile.value;
+      //   signup_data["password"] = document.myForm2.spass.value;
+
+      //   Notify({
+      //     content: "Signup Successful",
+      //     color: "green",
+      //     rounded: true,
+      //     timeout: 3000,
+      //   });
+
+      document
+        .getElementById("Submit")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          $.ajax({
+            method: "POST",
+            url: "https://iwp-project-backend.herokuapp.com/signup",
+            data: {
+              username: "kashish",
+              password: "qwerty12345",
+              mobile: "9993555347",
+              email: "kashish.mittal2018@vitstudent.ac.in",
             },
-            function (data, status) {
-              alert("Data: " + data + "\nStatus: " + status);
-            }
-          );
-          setTimeout(function () {
-            window.location.href = "../Module3/ChooseDropCreate.htm";
-          }, 2000);
-        } else if (
-          document.myForm1.luname.value != "" &&
-          document.myForm1.lpass.value != ""
-        ) {
-          Notify({
-            content: "Invalid Credentials",
-            color:
-              "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
-            rounded: true,
-            timeout: 3000,
-          });
-        }
-      });
-
-      document.myForm2.signup.addEventListener("click", function () {
-        if (document.myForm2.suname.value == "") {
-          Notify({
-            content: "Username must be filled out",
-            color:
-              "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
-            rounded: true,
-            timeout: 2000,
-          });
-        }
-
-        if (document.myForm2.email.value == "") {
-          Notify({
-            content: "Email must be filled out",
-            color:
-              "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
-            rounded: true,
-            timeout: 3000,
-          });
-        } else if (ValidateEmail(document.myForm2.email.value) == false) {
-          Notify({
-            content: "Email must be valid",
-            color:
-              "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
-            rounded: true,
-            timeout: 3000,
-          });
-        }
-
-        if (document.myForm2.mobile.value == "") {
-          Notify({
-            content: "Mobile Number must be filled out",
-            color:
-              "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
-            rounded: true,
-            timeout: 4000,
-          });
-        }
-
-        if (document.myForm2.spass.value == "") {
-          Notify({
-            content: "Password must be filled out",
-            color:
-              "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
-            rounded: true,
-            timeout: 5000,
-          });
-        }
-
-        if (
-          document.myForm2.suname.value != "" &&
-          document.myForm2.email.value != "" &&
-          document.myForm2.spass.value != "" &&
-          document.myForm2.mobile.value != ""
-        ) {
-          signup_data["username"] = document.myForm2.suname.value;
-          signup_data["email"] = document.myForm2.email.value;
-          signup_data["mobile"] = document.myForm2.mobile.value;
-          signup_data["password"] = document.myForm2.spass.value;
-
-          Notify({
-            content: "Signup Successful",
-            color: "green",
-            rounded: true,
-            timeout: 3000,
-          });
-          $.post(
-            "https://iwp-project-backend.herokuapp.com/signup",
-            {
-              username: "Mihir",
-              password: "Mihi679696",
-              mobile: "7111122339",
-              email: "mmkhsdcsdfdsdsmdk@odx23do.com",
+            success: function (data) {
+              alert("Data Saved" + data.message);
             },
-            function (data, status) {
-              alert("Data: " + data + "\nStatus: " + status);
-            }
-          );
+            error: function (err) {
+              console.log(err);
+            },
+          })
+        });
 
-          setTimeout(function () {
-            window.location.href = "../Module2/LoginSingUp.html#open-modal1";
-          }, 1000);
-        }
-      });
+      setTimeout(function () {
+        window.location.href = "../Module2/LoginSingUp.html#open-modal1";
+      }, 1000);
     </script>
     <script src="./Log In _ Sign Up_files/notify.min.js"></script>
     <script src="./Log In _ Sign Up_files/jquery-ui.js"></script>
