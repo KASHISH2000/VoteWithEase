@@ -534,15 +534,15 @@
           >
           <h2 style="text-align: center; color: #fff">Login</h2>
           <form
-            action="../Module3/ChooseDropCreate.htm"
             name="myForm1"
             align="center"
+            id="Login"
           >
             <input
               type="text"
               name="luname"
               id="luname"
-              placeholder="Username"
+              placeholder="Email"
               required=""
             /><br />
             <input
@@ -553,7 +553,7 @@
               required=""
             /><br />
             <p id="pss"></p>
-            <input type="button" name="login" value="Login" id="login_btn" />
+            <input type="submit" name="login" value="Login" id="login_btn" />
           </form>
         </div>
       </div>
@@ -761,13 +761,47 @@
             method: "POST",
             url: "https://iwp-project-backend.herokuapp.com/signup",
             data: {
-              username: "kashish",
-              password: "qwerty12345",
-              mobile: "9993555347",
-              email: "kashish.mittal2018@vitstudent.ac.in",
+              username: document.getElementById('suname').value,
+              password: document.getElementById('spass').value,
+              mobile: document.getElementById('mobile').value,
+              email: document.getElementById('email').value,
             },
             success: function (data) {
               alert("Data Saved" + data.message);
+              sessionStorage.token = data.token
+              setTimeout(function () {
+                window.location.href = "../Module3/ChooseDropCreate.htm";
+              }, 2000);
+            },
+            error: function (err) {
+              console.log(err);
+            },
+          })
+        });
+
+        document
+        .getElementById("Login")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          $.ajax({
+            method: "POST",
+            url: "https://iwp-project-backend.herokuapp.com/signin",
+            data: {
+              email: document.getElementById('luname').value,
+              password: document.getElementById('lpass').value
+            },
+            statusCode:{
+              404: function(xhr){
+                const data = JSON.parse(xhr.responseText)
+                alert(data.message)
+              }
+            },
+            success: function (data) {
+              alert("Login Successful");
+              sessionStorage.token = data.token
+              setTimeout(function () {
+                window.location.href = "../Module3/ChooseDropCreate.htm";
+              }, 2000);
             },
             error: function (err) {
               console.log(err);

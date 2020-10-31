@@ -15,6 +15,14 @@
       href="./ChooseDropCreate_files/font-awesome.min.css"
     /> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="../Module5/Set up Poll_files/jquery.js"></script>
+    <script>
+      window.onload = function(){
+        if(!sessionStorage.token){
+          window.location.href = "../Module1/Main.html";
+        }
+      }
+    </script>
     <title>Document</title>
     <style>
       @import url("https://fonts.googleapis.com/css?family=Alegreya+Sans:900");
@@ -330,9 +338,25 @@
 
     <script>
       document.querySelector(".results").addEventListener("click", function () {
-        setTimeout(() => {
-          window.location.href = "../Module6/Results.htm";
-        }, 1000);
+        $.ajax({
+          method : 'GET',
+          url : 'https://iwp-project-backend.herokuapp.com/vote/count',
+          headers: {
+            "Authorization": sessionStorage.token
+          },
+          statusCode : {
+            401 : function(data){
+              alert(data.message)
+            }
+          },
+          success : function(data){
+            sessionStorage['results']= JSON.stringify(data)
+            window.location.href = "../Module6/Results.htm";
+          },
+          error : function(err){
+            alert('err')
+          }
+        })
       });
 
       var signup_data = {};
@@ -347,11 +371,30 @@
       var drop = document.querySelector("#drop");
 
       create.addEventListener("click", function () {
+
         window.location.href = "../Module5/Set up Poll.htm";
       });
 
       drop.addEventListener("click", function () {
-        window.location.href = "../Module4/CasteVote.htm";
+        $.ajax({
+          method : 'GET',
+          url : 'https://iwp-project-backend.herokuapp.com/candidates',
+          headers: {
+    "Authorization": sessionStorage.token
+          },
+          statusCode : {
+            401 : function(data){
+              alert(data.message)
+            }
+          },
+          success : function(data){
+            sessionStorage['candidateData']= JSON.stringify(data)
+            window.location.href = "../Module4/CasteVote.htm";
+          },
+          error : function(err){
+            alert('err')
+          }
+        })
       });
     </script>
   </body>

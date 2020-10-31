@@ -2,6 +2,13 @@
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="icon" href="http://first_one.surge.sh/images/icon.png" type="image/x-icon">
     <title>Document</title>
+    <script>
+		window.onload = function(){
+			if(!sessionStorage.token){
+				window.location.href = "../Module1/Main.html";
+			}
+		}
+	</script>
 <style>
     @import url('https://fonts.googleapis.com/css?family=Electrolize&display=swap');
     @import url('https://fonts.googleapis.com/css?family=Open+Sans');
@@ -115,21 +122,10 @@
     <div class="wrap">
         <h1>Election Results</h1>
         <div class="holder">
-            <div class="bar" data-percent="90%" style="width: 90%;"><span class="label">Christopher Walken</span><span class="count">90%</span></div>
-
-            <div class="bar" data-percent="80%" style="width: 80%;"><span class="label second">Sean Penn</span><span class="count">80%</span></div>
-
-            <div class="bar" data-percent="50%" style="width: 50%;"><span class="label">Clint Eastwood</span><span class="count">50%</span></div>
-
-            <div class="bar" data-percent="65%" style="width: 65%;"><span class="label second">Dustin Hoffman</span><span class="count">65%</span></div>
-
-            <div class="bar" data-percent="55%" style="width: 55%;"><span class="label">Edward Norton</span><span class="count">55%</span></div>
-
-            <div class="bar" data-percent="85%" style="width: 85%;"><span class="label second">Michael Caine</span><span class="count">85%</span></div>
-
+        
         </div>
         <div class="back-btn">
-            <button class="back">Back</button>
+            <button class="back">Logout</button>
         </div>
     </div>
 
@@ -137,8 +133,21 @@
 
     <script src="./Results_files/jquery.min.js" integrity="sha256-IFHWFEbU2/+wNycDECKgjIRSirRNIDp2acEB5fvdVRU=" crossorigin="anonymous"></script>
     <script>
+        let totalVote =0
+        const results = JSON.parse(sessionStorage['results']).message
+        for(i=0;i<results.length;i++){
+            totalVote = totalVote + results[i].voteCount
+        }
+        console.log(totalVote)
+        for(i =0 ; i<results.length ; i++ ){
+            document.querySelector('.holder').insertAdjacentHTML(
+                'afterbegin',
+                `<div class="bar" data-percent="${(results[i].voteCount/totalVote)*100}%" style="width: ${(results[i].voteCount/totalVote)*100}%;"><span class="label">${results[i].name}</span><span class="count">${(results[i].voteCount/totalVote)*100}%</span></div>`
+            )
+        }
 
         document.querySelector('.back').addEventListener("click", ()=>{
+            sessionStorage.clear()
             window.location.href = "../Module2/LoginSingUp.html";
         })
 
