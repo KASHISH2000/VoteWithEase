@@ -1,3 +1,2 @@
 # VoteWithEase
-Online E-Voting System
-IWP Project
+Online E-Voting System - IWP Project
